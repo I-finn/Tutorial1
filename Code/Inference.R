@@ -2,21 +2,33 @@
 # Inference: A Reminder
 #######################
 
+# working on height data from ASDS class
+# try plot qnorm sx vs qnorm sigma
+# fix data - mean should be 173, not 173.6 (check 18* -> 16*)
+
 ## import our data
 data <- read.csv("Data/height.csv")
 
 ## REMEMBER: our data are drawn from a sample!
-(x_bar <- mean(data$height)) # not == mu
+(x_bar <- mean(data$height)) # not == mu (μ)
 
-## REMEMBER: the standard deviation of a sample is different 
-## to the standard deviation of a population: the denominator 
+## REMEMBER: the standard deviation of a sample (sx) is different 
+## to the standard deviation of a population (sigma σ): the denominator 
 ## is degrees of freedom (n -1), not n.
+n<-length(data$height)
 (sd_pop <- sqrt(
   sum(
-    (data$height - mean(data$height))^2)
-  /length(data$height))) # formula for the standard deviation
+    (data$height - x_bar)^2)
+  /n)) # formula for the standard deviation ie /n
 
-(sd_samp <- sd(data$height)) # the sd() function for a sample (n-1)
+#(sd_pop <- sqrt(
+#  sum(
+#    (data$height - mean(data$height))^2)
+#  /length(data$height))) # formula for the standard deviation ie /n
+
+# sample standard deviation
+
+(sd_samp <- sd(data$height)) # the sd() function for a sample ie /(n-1)
 
 sd_pop == sd_samp # these two are not the same
 
@@ -31,6 +43,8 @@ hist(data$height)
 (a_bootstrap_sample <- sample(data$height, 
                               size = 200, 
                               replace = TRUE))
+
+print(mean(a_bootstrap_sample))
 
 mean(a_bootstrap_sample) == x_bar # note that the means are different!
 
@@ -110,3 +124,6 @@ CI_upper <- qnorm(0.95,
 # best estimate of the standard deviation of the population.
 matrix(c(CI_lower, CI_upper), ncol = 2,
        dimnames = list("",c("Lower", "Upper")))
+
+# 90% confidence, ie 5% to 95%
+# if repeat sampling, expect means to fall in range 90% of the time

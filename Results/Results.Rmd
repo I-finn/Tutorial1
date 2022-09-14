@@ -1,18 +1,18 @@
 ---
-title: "Add a Title Here"
-author: "Your Name Here"
+title: "ASDS class heights"
+author: "Imelda Finn"
 date: "2022-09-14"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "..")
+knitr::opts_knit$set(root.dir = "..")   # revert to project working directory
 ```
 
 ## Introduction
 
-Give a brief introduction of the research question, and how you will answer it.
+How tall are people in the ASDS class and are they normally distributed.
 
 ## Data
 
